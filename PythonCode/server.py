@@ -48,6 +48,7 @@ def SesnorUit():
 
 @app.route('/SensorAan')
 def SensorAan():
+    print("sensor aan")
     #addToTerminal("<br> gay")
     return flask.redirect('/')
 
