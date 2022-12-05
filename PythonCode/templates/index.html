@@ -1,0 +1,137 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kamer</title>
+
+</head>
+<body>
+<style>
+
+    body{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        background-color: #2c313c;
+        font-family: 'Josefin Sans', sans-serif;
+    }
+    .center{
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+
+        background-color: #434a4e;
+        color: aliceblue;
+        padding: 50px;
+        border-radius: 10px;
+    }
+    h1{
+        font-size: 70px;
+        color: aliceblue;
+        margin-bottom: 60px;
+        margin-top: 20px;
+        background-color: #2c313c;
+        padding: 20px;
+        border-radius: 3px;
+    }
+    button{
+        outline: black solid 0px;
+        padding: 15px;
+        width: 200px;
+        margin: 10px;
+        margin-bottom: 40px;
+        border: 0;
+        font-family: 'Josefin Sans', sans-serif;
+
+        font-size: 20px;
+        background-color: #3693a2;
+        color: aliceblue;
+
+
+    }
+    button:hover{
+        outline: 3px solid black;
+        cursor: pointer;
+    }
+    .buttons{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+
+    .terminal{
+
+        width: 380px;
+        justify-items: left;
+        vertical-align: bottom;
+        background-color: #191d28;
+        padding: 3px 20px 10px;
+        height: 60px;
+        overflow-y: scroll;
+
+        margin-bottom: 10px;
+    }
+
+    p {
+        align-self: flex-start;
+
+    }
+    h2{
+        background-color: #2c313c;
+        padding: 10px;
+    }
+</style>
+
+<svg style="z-index: -1; position: absolute; top: -1px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+  <path fill="#0b5d75" fill-opacity="1" d="M0,160L80,181.3C160,203,320,245,480,245.3C640,245,800,203,960,197.3C1120,192,1280,224,1360,240L1440,256L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
+</svg>
+<svg style="z-index: -1; position: absolute; top: -1px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+  <path fill="#0e7d9e" fill-opacity="1" d="M0,128L10.4,106.7C20.9,85,42,43,63,69.3C83.5,96,104,192,125,229.3C146.1,267,167,245,188,202.7C208.7,160,230,96,250,85.3C271.3,75,292,117,313,122.7C333.9,128,355,96,376,101.3C396.5,107,417,149,438,165.3C459.1,181,480,171,501,165.3C521.7,160,543,160,563,170.7C584.3,181,605,203,626,197.3C647,192,668,160,689,144C709.6,128,730,128,751,106.7C772.2,85,793,43,814,64C834.8,85,856,171,877,197.3C897.4,224,918,192,939,186.7C960,181,981,203,1002,181.3C1022.6,160,1043,96,1064,69.3C1085.2,43,1106,53,1127,69.3C1147.8,85,1169,107,1190,144C1210.4,181,1231,235,1252,256C1273,277,1294,267,1315,234.7C1335.7,203,1357,149,1377,138.7C1398.3,128,1419,160,1430,176L1440,192L1440,0L1429.6,0C1419.1,0,1398,0,1377,0C1356.5,0,1336,0,1315,0C1293.9,0,1273,0,1252,0C1231.3,0,1210,0,1190,0C1168.7,0,1148,0,1127,0C1106.1,0,1085,0,1064,0C1043.5,0,1023,0,1002,0C980.9,0,960,0,939,0C918.3,0,897,0,877,0C855.7,0,835,0,814,0C793,0,772,0,751,0C730.4,0,710,0,689,0C667.8,0,647,0,626,0C605.2,0,584,0,563,0C542.6,0,522,0,501,0C480,0,459,0,438,0C417.4,0,397,0,376,0C354.8,0,334,0,313,0C292.2,0,271,0,250,0C229.6,0,209,0,188,0C167,0,146,0,125,0C104.3,0,83,0,63,0C41.7,0,21,0,10,0L0,0Z"></path>
+</svg>
+
+<div class="center">
+    <div class="box">
+
+        <h1>Kamer Controls</h1>
+        <div class="buttons">
+            <a href="/LichtUit"><button style="background-color: #cc5250">Licht Uit</button></a>
+            <a href="/LichtAan"><button style="background-color: #08d162">Licht Aan</button></a>
+
+            <a href="/StopContactUit"><button style="background-color: #cc5250">Stopcontact Uit</button></a>
+            <a href="/StopContactAan"><button style="background-color: #08d162">Stopcontact Aan</button></a>
+
+            <a href="/DeurDicht"><button style="background-color: #cc5250">Deur Dicht</button></a>
+            <a href="/DeurOpen"><button style="background-color: #08d162">Deur Open</button></a>
+        </div>
+
+        <h2>Deur Sensor</h2>
+        <div class="terminal" >
+            <p>{{Entries}} </p>
+        </div>
+        <div class="buttons" style="grid-template-rows: 1fr">
+            <a href="/SensorUit"><button style="background-color: #cc5250">Sensor Uit</button></a>
+            <a href="/SensorAan"><button style="background-color: #08d162">Sensor Aan</button></a
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+</body>
+</html>
