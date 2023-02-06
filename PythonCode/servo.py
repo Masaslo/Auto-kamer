@@ -1,18 +1,19 @@
-import wiringpi as wpi
+import RPi.GPIO as GPIO
 import time
 
-servoPin2 = 23 #fysieke pin is 33
-# use 'GPIO naming'
-wpi.wiringPiSetup()
+# Initialize the GPIO library
+GPIO.setmode(GPIO.BCM)
 
-# set #1 to be a PWM output
 
-max = 500
-min = 75
+# Function to set up the servo on a specific GPIO pin
+def servoSetup(pin):
+    GPIO.setup(pin, GPIO.OUT)
+    return GPIO.PWM(pin, 50)
 
-def servoSetup(servoPin):
-    wpi.pinMode(servoPin, wpi.PWM_OUTPUT)
-def writeToServo(servoPin, angle):
-    write = (((max - min) / 180 ) * angle) + min
-    wpi.pwmWrite(servoPin, int(write))
-    print(write)
+
+# Function to set the servo position to a specific angle
+def servoWrite(angle, pwm):
+    duty = angle / 18 + 2
+    pwm.start(duty)
+    time.sleep(0.5)
+    pwm.stop()

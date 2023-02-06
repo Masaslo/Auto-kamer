@@ -15,10 +15,13 @@ app = flask.Flask('__name__')
  #       json.dump(newString, f)
  #       p = newString
 
+lichtServoPort = 12
+
 
 
 @app.route('/LichtUit')
 def LichtUit():
+
     return flask.redirect('/')
 
 @app.route('/LichtAan')
@@ -54,7 +57,10 @@ def SensorAan():
 
 @app.route('/')
 def home():
-    return flask.render_template('index.html')
+    return flask.render_template('index(old).html')
 
 def maakServer():
     app.run(host='0.0.0.0', port=5000)
+
+if __name__ == '__main__':
+    maakServer()
