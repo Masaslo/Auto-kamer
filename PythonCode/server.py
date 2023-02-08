@@ -57,7 +57,7 @@ def SensorAan():
 
 @app.route('/')
 def home():
-    return flask.render_template('index(old).html')
+    return flask.render_template('index.html')
 
 def maakServer():
     app.run(host='0.0.0.0', port=5000)

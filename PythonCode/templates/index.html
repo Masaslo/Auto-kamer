@@ -1,301 +1,167 @@
-!
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AutoKamer</title>
+    <title>Document</title>
 </head>
-
 <style>
-    /* Group 1 */
+    body{
+        background-color: #2c313c;
+        font-family: 'Josefin Sans', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+
+        margin: 0px;
+        color: aliceblue;
+    }
+    #main{
+
+        padding: 20px;
+        width: 100%;
+        max-width: 600px;
+        background-color: #191d28;
+        width: 85%;
+        max-width: 600px;
+        margin-top: 0px;
+    }
+
+    .box, #info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr 1fr;
+        grid-column-gap: 10px;
+        background-color: #434a4e;
+        border: 2px solid #191d28;
+          border-radius: 15px;
+          margin: 10px
+    }
+    #info{
+        grid-template-rows: 1fr 2fr;
+    }
+    h1 {
+        grid-column: 1 / 3;
+        text-align: center;
+    }
+
+    .rechterkolom, .linkerkolom {
+      display: flex;
+        flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      grid-column: 1;
+    }
+
+    .linkerkolom{
+        grid-column: 1;
+    }
+    .rechterkolom{
+        grid-column: 2;
+    }
+
+    button {
+        width: 70%;
+        height: 70%;
+        border: 0;
+    }
+    .aan{
+        background-color:  #08d162;
+    }
+    .uit{
+        background-color: #cc5250;
+    }
+
+    h1{
+        font-size: 20px;
+    }
+
+    @media screen and (min-width: 680px) {
+        h1{
+            font-size: 25px;
+        }
+
+    }
 
 
-position: absolute;
-width: 360px;
-height: 800px;
-left: 0px;
-top: 0px;
-
-
-
-/* Rectangle 1 */
-
-
-position: absolute;
-width: 360px;
-height: 91px;
-left: 0px;
-top: 0px;
-
-background: #31373D;
-
-
-/* AutoKamer */
-
-
-position: absolute;
-width: 325px;
-height: 65px;
-left: 18px;
-top: 12px;
-
-font-family: 'Inter';
-font-style: italic;
-font-weight: 800;
-font-size: 40px;
-line-height: 48px;
-display: flex;
-align-items: center;
-letter-spacing: 0.13em;
-
-color: #FFFFFF;
-
-
-
-/* _basicSolid large Base */
-
-
-/* Auto layout */
-
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 16px 32px;
-
-position: absolute;
-width: 121px;
-height: 60px;
-left: calc(50% - 121px/2 - 68.5px);
-top: 218px;
-
-background: #CC5250;
-border: 4px solid #3E4554;
-border-radius: 8px;
-
-
-/* _basicSolid large Base */
-
-
-/* Auto layout */
-
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 16px 32px;
-
-position: absolute;
-width: 121px;
-height: 60px;
-left: 198px;
-top: 218px;
-
-background: #08D162;
-border: 4px solid #3E4554;
-border-radius: 8px;
-
-
-/* Rectangle 2 */
-
-
-position: absolute;
-width: 294px;
-height: 61px;
-left: calc(50% - 294px/2);
-top: 134px;
-
-background: #31373D;
-border-radius: 5px;
-
-
-/* Lichten */
-
-
-position: absolute;
-width: 293px;
-height: 63px;
-left: calc(50% - 293px/2 + 0.5px);
-top: calc(50% - 63px/2 - 236.5px);
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 40px;
-line-height: 32px;
-/* or 80% */
-
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #FFFFFF;
-
-
-
-/* _basicSolid large Base */
-
-
-/* Auto layout */
-
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 16px 32px;
-
-position: absolute;
-width: 121px;
-height: 60px;
-left: calc(50% - 121px/2 - 68.5px);
-top: 413px;
-
-background: #CC5250;
-border: 4px solid #3E4554;
-border-radius: 8px;
-
-
-/* _basicSolid large Base */
-
-
-/* Auto layout */
-
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 16px 32px;
-
-position: absolute;
-width: 121px;
-height: 60px;
-left: 198px;
-top: 413px;
-
-background: #08D162;
-border: 4px solid #3E4554;
-border-radius: 8px;
-
-
-/* Rectangle 3 */
-
-
-position: absolute;
-width: 294px;
-height: 61px;
-left: calc(50% - 294px/2);
-top: 329px;
-
-background: #31373D;
-border-radius: 5px;
-
-
-/* Lichten */
-
-
-position: absolute;
-width: 293px;
-height: 63px;
-left: calc(50% - 293px/2 + 0.5px);
-top: calc(50% - 63px/2 - 41.5px);
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 40px;
-line-height: 32px;
-/* or 80% */
-
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #FFFFFF;
-
-
-
-/* _basicSolid large Base */
-
-
-/* Auto layout */
-
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 16px 32px;
-
-position: absolute;
-width: 121px;
-height: 60px;
-left: calc(50% - 121px/2 - 68.5px);
-top: 625px;
-
-background: #CC5250;
-border: 4px solid #3E4554;
-border-radius: 8px;
-
-
-/* _basicSolid large Base */
-
-
-/* Auto layout */
-
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 16px 32px;
-
-position: absolute;
-width: 121px;
-height: 60px;
-left: 198px;
-top: 625px;
-
-background: #08D162;
-border: 4px solid #3E4554;
-border-radius: 8px;
-
-
-/* Rectangle 4 */
-
-.
-position: absolute;
-width: 294px;
-height: 61px;
-left: calc(50% - 294px/2);
-top: 541px;
-
-background: #31373D;
-border-radius: 5px;
-
-
-.lichtenTekst {
-    position: absolute;
-width: 293px;
-height: 63px;
-left: calc(50% - 293px/2 + 0.5px);
-top: calc(50% - 63px/2 + 170.5px);
-
-font-family: 'Inter',serif;
-font-style: normal;
-font-weight: 700;
-font-size: 40px;
-line-height: 32px;
-}
-
-/* or 80% */
-
-/*display: flex;*/
-/*align-items: center;*/
-/*text-align: center;*/
-
-/*color: #FFFFFF;*/
 </style>
 <body>
+<!--<header>-->
+<!--    Kamer Control Panel-->
+<!--</header>-->
+<div id="main">
+    <div id="info" style="margin-top: 0px">
+        <h1 style="padding: 10px; padding-bottom: 0px; margin-bottom: 0px;">Info</h1>
+        <div class="linkerkolom" style="margin-top: 0px">
+            <span class="informationSpan">Temperatuur: </span> <br>
+            <span class="informationSpan">Licht: </span><br>
+            <span class="informationSpan">Slot: </span>
+        </div>
+        <div class="rechterkolom" style="margin-top: 0px">
+            <span class="informationValue">{{temp}}</span><br>
+            <span class="informationValue">{{licht}}</span><br>
+            <span class="informationValue">{{slot}}</span>
+        </div>
+    </div>
+
+
+
+
+    <div class="box">
+        <h1>Licht</h1>
+        <div class="linkerkolom">
+            <button class="uit">Uit</button>
+        </div>
+        <div class="rechterkolom">
+            <button class="aan">Aan</button>
+        </div>
+    </div>
+
+
+
+
+    <div class="box">
+        <h1>Slot</h1>
+        <div class="linkerkolom">
+            <button class="uit">Dicht</button>
+        </div>
+        <div class="rechterkolom">
+            <button class="aan">Open</button>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="box">
+        <h1>Stopcontact</h1>
+        <div class="linkerkolom">
+            <button class="uit">uit</button>
+        </div>
+        <div class="rechterkolom">
+            <button class="aan">aan</button>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="box">
+        <h1>Auto</h1>
+        <div class="linkerkolom">
+            <button class="uit">uit</button>
+        </div>
+        <div class="rechterkolom">
+            <button class="aan">aan</button>
+        </div>
+    </div>
+
+
+
 
 </body>
 </html>
