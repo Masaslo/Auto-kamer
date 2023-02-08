@@ -8,7 +8,7 @@
 </head>
 <style>
     body{
-        background-color: #2c313c;
+        background-color: #3d424b;
         font-family: 'Josefin Sans', sans-serif;
         display: flex;
         flex-direction: column;
@@ -17,32 +17,49 @@
 
         margin: 0px;
         color: aliceblue;
+
+        overflow: hidden;
     }
     #main{
 
         padding: 20px;
         width: 100%;
         max-width: 600px;
-        background-color: #191d28;
         width: 85%;
         max-width: 600px;
         margin-top: 0px;
     }
 
-    .box, #info {
+    .box {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 1fr 1fr;
         grid-column-gap: 10px;
-        background-color: #434a4e;
-        border: 2px solid #191d28;
+        background-color: #21252b;
+        border: 2px solid #21252b;
           border-radius: 15px;
           margin: 10px
     }
     #info{
-        grid-template-rows: 1fr 2fr;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .rij {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 20px;
+        background-color: #282c34;
+        width: 87%;
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 10px;
+
     }
     h1 {
+        font-family: Impact;
+        font-weight: lighter;
         grid-column: 1 / 3;
         text-align: center;
     }
@@ -66,6 +83,15 @@
         width: 70%;
         height: 70%;
         border: 0;
+
+        color: aliceblue;
+        font-size: large;
+        font-weight: bolder;
+
+        border-radius: 10px;
+    }
+    button:active{
+        border: 2px #21252b solid;
     }
     .aan{
         background-color:  #08d162;
@@ -77,12 +103,30 @@
     h1{
         font-size: 20px;
     }
+    span {
+        font-size: 12px;
+    }
 
     @media screen and (min-width: 680px) {
         h1{
             font-size: 25px;
         }
+        span {
+        font-size: 16px;
+        }
 
+    }
+    a{
+        width: 100%;
+        height: 100%;
+    }
+
+    #lichtaan, #slotopen, #autolichtaan, #autoslotaan{
+        background-color: #08d162;
+        padding: 6px;
+    }
+    #lichtuit, #slotdicht, #autolichtuit, #autoslotuit{
+        background-color: #cc5250;
     }
 
 
@@ -94,16 +138,21 @@
 <div id="main">
     <div id="info" style="margin-top: 0px">
         <h1 style="padding: 10px; padding-bottom: 0px; margin-bottom: 0px;">Info</h1>
-        <div class="linkerkolom" style="margin-top: 0px">
-            <span class="informationSpan">Temperatuur: </span> <br>
-            <span class="informationSpan">Licht: </span><br>
-            <span class="informationSpan">Slot: </span>
-        </div>
-        <div class="rechterkolom" style="margin-top: 0px">
-            <span class="informationValue">{{temp}}</span><br>
-            <span class="informationValue">{{licht}}</span><br>
-            <span class="informationValue">{{slot}}</span>
-        </div>
+        <table>
+            <div class="rij">
+                <span class="informationSpan">Temperatuur: </span>
+                <span class="informationValue">{{temp}}</span>
+                </div>
+            <div class="rij">
+                <span class="informationSpan">Licht: </span>
+                <span class="informationValue" id="{{licht}}"></span>
+            </div>
+            <div class="rij">
+                <span class="informationSpan" >Slot: </span>
+                <span class="informationValue" id="{{slot}}"></span>
+            </div>
+        </table>
+
     </div>
 
 
@@ -112,10 +161,10 @@
     <div class="box">
         <h1>Licht</h1>
         <div class="linkerkolom">
-            <button class="uit">Uit</button>
+            <button class="uit" onclick="window.location.href='/lichtuit'" target="_self">Uit</button>
         </div>
         <div class="rechterkolom">
-            <button class="aan">Aan</button>
+            <button class="aan" onclick="window.location.href='/lichtaan'" target="_self">Aan</button>
         </div>
     </div>
 
@@ -125,10 +174,11 @@
     <div class="box">
         <h1>Slot</h1>
         <div class="linkerkolom">
-            <button class="uit">Dicht</button>
+            <button class="uit" onclick="window.location.href='/slotdicht'" target="_self">Dicht</button>
+
         </div>
         <div class="rechterkolom">
-            <button class="aan">Open</button>
+            <button class="aan" onclick="window.location.href='/slotopen'" target="_self">Open</button>
         </div>
     </div>
 
@@ -139,10 +189,10 @@
     <div class="box">
         <h1>Stopcontact</h1>
         <div class="linkerkolom">
-            <button class="uit">uit</button>
+            <button class="uit" onclick="window.location.href='/stopcontactuit'" target="_self">Uit</button>
         </div>
         <div class="rechterkolom">
-            <button class="aan">aan</button>
+            <button class="aan" onclick="window.location.href='/stopcontactaan'" target="_self">Aan</button>
         </div>
     </div>
 
@@ -153,10 +203,10 @@
     <div class="box">
         <h1>Auto</h1>
         <div class="linkerkolom">
-            <button class="uit">uit</button>
+            <button id="{{autolicht}}" onclick="window.location.href='/autolicht'" target="_self">Licht</button>
         </div>
         <div class="rechterkolom">
-            <button class="aan">aan</button>
+            <button id="{{autoslot}}" onclick="window.location.href='/autoslot'" target="_self">Slot</button>
         </div>
     </div>
 
