@@ -5,7 +5,6 @@ import time
 def lichtAan():
     pass
 
-
 def lichtUit():
     pass
 
