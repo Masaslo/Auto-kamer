@@ -6,7 +6,7 @@ var = 0
 def func1():
     while True:
         time.sleep(1)
-        printline(var)
+        print(var)
 
 def func2():
     global var

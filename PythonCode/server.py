@@ -1,6 +1,7 @@
 import flask
 import json
 import sys
+import serial
 
 app = flask.Flask('__name__')
 
@@ -17,6 +18,11 @@ app = flask.Flask('__name__')
 
 lichtServoPort = 12
 
+serialDevice = "/dev/ttyUSB0"
+
+def init():
+    global ser
+    ser = serial.Serial(serialDevice, 9600)
 
 
 @app.route('/LichtUit')
