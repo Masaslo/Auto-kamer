@@ -1,10 +1,11 @@
 import server
+#import servo
 import threading
 import time
+import LCD
 
 def lichtAan():
     pass
-
 
 def lichtUit():
     pass
