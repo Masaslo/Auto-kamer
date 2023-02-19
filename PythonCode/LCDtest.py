@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 from time import sleep
-
+import time
 # Define GPIO to LCD mapping
 LCD_RS = 8
 LCD_E = 7
