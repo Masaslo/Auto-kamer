@@ -40,15 +40,15 @@ def main():
         # Send some test
         lcd_string("Electronics Hub ", LCD_LINE_1)
         lcd_string("    Presents    ", LCD_LINE_2)
-
+        print("printed line 1 and 2")
         sleep(3)  # 3 second delay
 
         # Send some text
         lcd_string("Rasbperry Pi", LCD_LINE_1)
         lcd_string("16x2 LCD Test", LCD_LINE_2)
-
+        print("sent text")
         sleep(3)  # 3 second delay
-
+        print("sent more text")
         # Send some text
         lcd_string("1234567890*@$#%&", LCD_LINE_1)
         lcd_string("lowrcaseUPPRCASE", LCD_LINE_2)
