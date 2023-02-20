@@ -1,3 +1,8 @@
+import threading
+import time
+import RPi.GPIO as GPIO
+from gpiozero import Servo
+
 import flask
 import json
 import sys
@@ -15,18 +20,22 @@ app = flask.Flask('__name__')
  #       json.dump(newString, f)
  #       p = newString
 
-lichtServoPort = 12
+lichtServoPortUit = 12
+lichtServoPortAan = 11
 
 autoslot = "autoslotaan"
 autolicht = "autolichtaan"
 
 @app.route('/lichtuit')
 def LichtUit():
-
+    global licht
+    licht = "lichtuit"
     return flask.redirect('/')
 
 @app.route('/lichtaan')
 def LichtAan():
+    global licht
+    licht = "lichtaan"
     return flask.redirect('/')
 
 @app.route('/slotopen')
@@ -86,5 +95,36 @@ def home():
 def maakServer():
     app.run(host='0.0.0.0', port=5000)
 
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+
+lichtUitServo = Servo(lichtServoPortUit)
+lichtAanServo = Servo(lichtServoPortAan)
+
+
+
 if __name__ == '__main__':
-    maakServer()
+    readyForUit = True
+    readyForAan = True
+
+    if licht == "lichtaan" and readyForAan:
+        lichtAanServo.value = 0
+        time.sleep(2)
+        lichtAanServo.value = -1
+        readyForAan = False
+        readyForUit = True
+
+    if licht == "lichtuit" and readyForUit:
+        lichtUitServo.value = 0
+        time.sleep(2)
+        lichtUitServo.value = -1
+        readyForUit = False
+        readyForAan = True
+
+
+
+    serverThread = threading.Thread(target=maakServer)
+    serverThread.start()
+    while True:
+        print(licht)
+        time.sleep(1)
