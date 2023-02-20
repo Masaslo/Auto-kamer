@@ -1,13 +1,13 @@
 import RPi.GPIO as GPIO
 from time import sleep
-
+import time
 # Define GPIO to LCD mapping
-LCD_RS = 7
-LCD_E = 8
-LCD_D4 = 25
-LCD_D5 = 24
-LCD_D6 = 23
-LCD_D7 = 18
+LCD_RS = 8
+LCD_E = 7
+LCD_D4 = 6
+LCD_D5 = 13
+LCD_D6 = 19
+LCD_D7 = 26
 
 # Define some device constants
 LCD_WIDTH = 16  # Maximum characters per line
@@ -40,15 +40,15 @@ def main():
         # Send some test
         lcd_string("Electronics Hub ", LCD_LINE_1)
         lcd_string("    Presents    ", LCD_LINE_2)
-
+        print("printed line 1 and 2")
         sleep(3)  # 3 second delay
 
         # Send some text
         lcd_string("Rasbperry Pi", LCD_LINE_1)
         lcd_string("16x2 LCD Test", LCD_LINE_2)
-
+        print("sent text")
         sleep(3)  # 3 second delay
-
+        print("sent more text")
         # Send some text
         lcd_string("1234567890*@$#%&", LCD_LINE_1)
         lcd_string("lowrcaseUPPRCASE", LCD_LINE_2)
