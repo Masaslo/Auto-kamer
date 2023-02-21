@@ -2,12 +2,12 @@ import RPi.GPIO as GPIO
 from time import sleep
 import time
 # Define GPIO to LCD mapping
-LCD_RS = 8
-LCD_E = 7
-LCD_D4 = 6
-LCD_D5 = 13
-LCD_D6 = 19
-LCD_D7 = 26
+LCD_RS =17
+LCD_E = 4
+LCD_D4 = 27
+LCD_D5 = 22
+LCD_D6 = 5
+LCD_D7 = 6
 
 # Define some device constants
 LCD_WIDTH = 16  # Maximum characters per line
