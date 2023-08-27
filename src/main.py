@@ -11,8 +11,8 @@ MQTT_USR_NAME = "boersfm"
 MQTT_USR_PASS = "P6Kv9Kakc5VcGPBu6FVr"
 
 class MqttController:
-    def __init__(self, broker_address, serialObject, pushBulletObject, port=1883):
-        self.broker_address = broker_address
+    def __init__(self, BROKER_ADDRESS, serialObject, pushBulletObject, port=1883):
+        self.broker_address = BROKER_ADDRESS
         self.port = port
         self.client = mqtt.Client(MQTT_ID)
         self.serialObjectInClass = serialObject
@@ -26,9 +26,9 @@ class MqttController:
         self.client.subscribe("boersfm/thuis/#")
 
     def on_message(self, client, userdata, message):
-        messageData = message.payload.decode()
-        print(f"Recived message on topic '{message.topic}': \n'{messageData}'\nnow attempting to decode")
-        checkMessage(message.topic, messageData, self.serialObjectInClass, self.pushBulletObjectInClass)
+        message_data = message.payload.decode()
+        print(f"Recived message on topic '{message.topic}': \n'{message_data}'\nnow attempting to decode")
+        check_message(message.topic, message_data, self.serialObjectInClass, self.pushBulletObjectInClass)
 
     def connect(self):
         self.client.username_pw_set(MQTT_USR_NAME, MQTT_USR_PASS)
@@ -53,24 +53,20 @@ class SerialController:
     def readFromSerial(self):
         self.data = self.ser.readline().decode().strip()  # Read and decode data
         return self.data
-    def sendDataToSerial(self, sendingData):
-        print(f"sent: {sendingData} to Serial device")
-        encodedString = f"{sendingData}\n".encode('utf-8')
-        self.ser.write(encodedString)
+    def sendDataToSerial(self, sending_data):
+        print(f"sent: {sending_data} to Serial device")
+        encoded_string = f"{sending_data}\n".encode('utf-8')
+        self.ser.write(encoded_string)
 
-def checkMessage(topic, message, serialObjectInFunction, pushBulletObjectInFunction):
+def check_message(topic, message, serialObjectInFunction, pushBulletObjectInFunction):
     try:
         if topic == "boersfm/thuis/licht":
-            print("recieved message from licht topic")
             if message == "aan":
                 print("trying to turn light on")
                 serialObjectInFunction.sendDataToSerial("lichtAan")
-                print("sent information to arduino: lichtAan")
-                pushBulletObjectInFunction.sendNotification("Auto-Kamer", "Licht aan")
             elif message == "uit":
                 print("trying to turn light off")
                 serialObjectInFunction.sendDataToSerial("lichtUit")
-                print("sent information to arduino: lichtAan")
         print("message processed\n")
     except Exception as e:
         print("failed to send message, error:")
@@ -102,9 +98,9 @@ if __name__ == "__main__":
         mqttController.connect()
 
         while True:
-            data = serialController.readFromSerial()
-            if data:
-                print(data)
+            serial_data = serialController.readFromSerial()
+            if serial_data:
+                print(serial_data)
             time.sleep(.05)
     except KeyboardInterrupt:
         pass
