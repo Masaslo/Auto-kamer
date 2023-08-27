@@ -1,8 +1,11 @@
 # import MQTTConnection as connection
+import sys
 import time
 import serial
 import paho.mqtt.client as mqtt
 from pushBulletModule import PushBulletController
+
+
 
 MQTT_BROKER = "mqtt.hva-robots.nl"
 
@@ -24,6 +27,19 @@ class MqttController:
     def on_connect(self, client, userdata, flags, rc):
         print(f"connected to MQTT server {self.broker_address} as with result code {rc}")
         self.client.subscribe("boersfm/thuis/#")
+        # try:
+        #     last_push = pushBulletObjectInClass.get_push_from_index(0)
+        #     if(last_push.get("title") == "AK - Mqtt Disconnected"):
+        #         self.pushBulletObjectInClass.dismiss_push(pushes_list.get(""))
+        # except PushBulletException:
+        #     pass
+
+    def on_disconnect(self, client, userdata, flags, rc):
+        DISCONNECTED_MESSAGE = f"disconnecten from MQTT server {self.broker_address} as with result code {rc}.\nUser data: {userdata}"
+        print(DISCONNECTED_MESSAGE)
+        pushBulletObjectInClass.send_notification("AK - Mqtt Disconnected", DISCONNECTED_MESSAGE)
+
+
 
     def on_message(self, client, userdata, message):
         message_data = message.payload.decode()
@@ -67,11 +83,17 @@ def check_message(topic, message, serialObjectInFunction, pushBulletObjectInFunc
             elif message == "uit":
                 print("trying to turn light off")
                 serialObjectInFunction.sendDataToSerial("lichtUit")
+        if topic == "boersfm/thuis/exit":
+            systemExit(pushBulletObjectInFunction, "System exit via MQTT command. Message :\n" + message)
         print("message processed\n")
-    except Exception as e:
+    except Exception as exception:
         print("failed to send message, error:")
-        print(e)
+        print(exception)
 
+def systemExit(pushBulletObjectInFunction, message):
+    pushBulletObjectInFunction.send_notification("AK - System Exit", message)
+    time.sleep(1)
+    sys.exit(0)
 
 if __name__ == "__main__":
     try:
@@ -98,10 +120,16 @@ if __name__ == "__main__":
         mqttController.connect()
 
         while True:
-            serial_data = serialController.readFromSerial()
-            if serial_data:
-                print(serial_data)
-            time.sleep(.05)
+            try:
+                serial_data = serialController.readFromSerial()
+                if serial_data:
+                    print(serial_data)
+                    if(serial_data == 10 or serial_data == "10"):
+                        # sys.exit(1)
+                        pass
+                time.sleep(.05)
+            except Exception as e:
+                systemExit(pushBulletController, "Error:\n" + str(e))
     except KeyboardInterrupt:
         pass
 

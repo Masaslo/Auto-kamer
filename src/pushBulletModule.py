@@ -1,5 +1,5 @@
 from pushbullet import Pushbullet
-
+import time
 class PushBulletController:
     def __init__(self):
         self.API_KEY = "o.otbOmfJ1shH9CPfjs3KbtneaoZcs5DQq"
@@ -8,9 +8,20 @@ class PushBulletController:
     def send_notification(self, Class, data):
         self.pb.push_note(Class, data)
 
-    def send_mqtt_lost_connection_notification(self, errorMessage):
-        send_notification("Auto Kamer Error", "MQTT Connection lost error message: \n" + errorMessage)
+    def dismiss_push_from_index(self, index):
+        pushes = pushBulletController.pb.get_pushes()
+        pushBulletController.pb.dismiss_push(pushes[index].get("iden"))
+
+    def get_push_from_index(self, index):
+        pushes = pushBulletController.pb.get_pushes()
+        return pushes[index]
+
+    # def dismiss_push_from_id(self, title):
+    #     pushes = pushBulletController.pb.get_pushes()
+
 
 if __name__ == "__main__":
-    pushBulletController = pushBulletController()
-    pushBulletController.sendNotification("testing", "DIT IS EEN TEST")
+    pushBulletController = PushBulletController()
+    pushBulletController.send_notification("testing", "DIT IS EEN TEST3 ")
+
+
