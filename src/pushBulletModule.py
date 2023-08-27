@@ -1,6 +1,6 @@
 from pushbullet import Pushbullet
 
-class pushBulletController:
+class PushBulletController:
     def __init__(self):
         self.API_KEY = "o.otbOmfJ1shH9CPfjs3KbtneaoZcs5DQq"
         self.pb = Pushbullet(self.API_KEY)

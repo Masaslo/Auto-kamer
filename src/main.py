@@ -2,14 +2,21 @@
 import time
 import serial
 import paho.mqtt.client as mqtt
-import pushBulletModule
+from pushBulletModule import PushBulletController
+
+MQTT_BROKER = "mqtt.hva-robots.nl"
+
+MQTT_ID = "AutoKamer_V1"
+MQTT_USR_NAME = "boersfm"
+MQTT_USR_PASS = "P6Kv9Kakc5VcGPBu6FVr"
 
 class MqttController:
-    def __init__(self, broker_address, SerialObject, port=1883):
+    def __init__(self, broker_address, serialObject, pushBulletObject, port=1883):
         self.broker_address = broker_address
         self.port = port
-        self.client = mqtt.Client()
-        self.SerialObjectInClass = SerialObject
+        self.client = mqtt.Client(MQTT_ID)
+        self.serialObjectInClass = serialObject
+        self.pushBulletObjectInClass = pushBulletObject
 
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
@@ -21,10 +28,10 @@ class MqttController:
     def on_message(self, client, userdata, message):
         messageData = message.payload.decode()
         print(f"Recived message on topic '{message.topic}': \n'{messageData}'\nnow attempting to decode")
-        checkMessage(message.topic, messageData, self.SerialObjectInClass)
+        checkMessage(message.topic, messageData, self.serialObjectInClass, self.pushBulletObjectInClass)
 
     def connect(self):
-        self.client.username_pw_set("boersfm", "P6Kv9Kakc5VcGPBu6FVr")
+        self.client.username_pw_set(MQTT_USR_NAME, MQTT_USR_PASS)
         self.client.connect(self.broker_address, self.port)
         self.client.loop_start()
 
@@ -40,6 +47,7 @@ class MqttController:
 
 class SerialController:
     def __init__(self, device, baudrate):
+        self.data = None
         self.ser = serial.Serial(device, baudrate)
         self.ser.timeout = 2
     def readFromSerial(self):
@@ -47,26 +55,33 @@ class SerialController:
         return self.data
     def sendDataToSerial(self, sendingData):
         print(f"sent: {sendingData} to Serial device")
-        self.ser.write(f"{sendingData}\n")
+        encodedString = f"{sendingData}\n".encode('utf-8')
+        self.ser.write(encodedString)
 
-def checkMessage(topic, message, SerialObjectInFunction):
+def checkMessage(topic, message, serialObjectInFunction, pushBulletObjectInFunction):
     try:
-        if(topic == "boersfm/thuis/licht"):
+        if topic == "boersfm/thuis/licht":
             print("recieved message from licht topic")
-            if(message == "aan"):
+            if message == "aan":
                 print("trying to turn light on")
-                SerialObjectInFunction.sendDataToSerial("lichtAan")
+                serialObjectInFunction.sendDataToSerial("lichtAan")
                 print("sent information to arduino: lichtAan")
-            elif(message == "uit"):
+                pushBulletObjectInFunction.sendNotification("Auto-Kamer", "Licht aan")
+            elif message == "uit":
                 print("trying to turn light off")
-                SerialObjectInFunction.sendDataToSerial("lichtUit")
+                serialObjectInFunction.sendDataToSerial("lichtUit")
                 print("sent information to arduino: lichtAan")
         print("message processed\n")
-    except Exception:
-        pass
+    except Exception as e:
+        print("failed to send message, error:")
+        print(e)
+
 
 if __name__ == "__main__":
     try:
+        # make a pushBulletController instance
+        pushBulletController = PushBulletController()
+
         # Try connecting to AMC0 and if that fails connect to ACM1, else serialCOntroller is set to null
         try:
             print("connecting to /dev/ttyACM0 as a serial device")
@@ -83,7 +98,7 @@ if __name__ == "__main__":
                 print("connecting to arduino failed again, please ")
 
 
-        mqttController = MqttController('mqtt.hva-robots.nl', serialController)
+        mqttController = MqttController(MQTT_BROKER, serialController, pushBulletController)
         mqttController.connect()
 
         while True:
