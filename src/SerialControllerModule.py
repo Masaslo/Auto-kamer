@@ -11,3 +11,8 @@ class SerialController:
         print(f"sent: {sending_data} to Serial device")
         encoded_string = f"{sending_data}\n".encode('utf-8')
         self.ser.write(encoded_string)
+
+if __name__ == "__main__":
+    serialController = SerialController('/dev/ttyACM0', 9600)
+    while True:
+        print(serialController.readFromSerial())

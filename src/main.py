@@ -1,7 +1,7 @@
-# import MQTTConnection as connection
 import sys
 import time
 import paho.mqtt.client as mqtt
+import serial
 from SerialControllerModule import SerialController
 from pushBulletModule import PushBulletController
 
@@ -91,7 +91,7 @@ if __name__ == "__main__":
         # Try connecting to AMC0 and if that fails connect to ACM1, else serialCOntroller is set to null
         try:
             print("connecting to /dev/ttyACM0 as a serial device")
-            serialController = SerialController('/dev/ttyACM1', 9600)
+            serialController = SerialController('/dev/ttyACM0', 9600)
 
         except serial.serialutil.SerialException:
             try:
@@ -100,7 +100,7 @@ if __name__ == "__main__":
                 serialController = SerialController('/dev/ttyACM1', 9600)
 
             except serial.serialutil.SerialException:
-                serialController = null
+                serialController = None
                 print("connecting to arduino failed again, please ")
 
 
@@ -120,5 +120,3 @@ if __name__ == "__main__":
                 systemExit(pushBulletController, "Error:\n" + str(e))
     except KeyboardInterrupt:
         pass
-
-# Close the serial connection when done
