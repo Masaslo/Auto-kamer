@@ -1,9 +1,11 @@
 package com.example.auto_kamer_app;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,10 +16,9 @@ import com.example.auto_kamer_app.databinding.FragmentFirstBinding;
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
-
     @Override
     public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
+            @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
 
@@ -28,13 +29,29 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.d("MQTT", "BABA ");
 
-        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+        binding.buttonOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(!MqttHandeler.isConnected()){
+                    MqttHandeler.connect();
+                }
+                Log.d("MqttHandler", "CLICKED ON");
+                MqttHandeler.publish("boersfm/lights", "true");
             }
         });
+        binding.buttonOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!MqttHandeler.isConnected()){
+                    MqttHandeler.connect();
+                }
+                Log.d("MqttHandler", "CLICKED ON");
+                MqttHandeler.publish("boersfm/lights", "false");
+            }
+        });
+
     }
 
     @Override

@@ -11,30 +11,44 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
-        <Button
-            android:id="@+id/button_first"
-            android:layout_width="370dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:text="OFF"
+        <LinearLayout
+            android:layout_width="384dp"
+            android:layout_height="242dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"
-            android:backgroundTint="@android:color/holo_red_light"/>
+            app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="370dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:text="ON"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:backgroundTint="@android:color/holo_green_light"
-            app:rippleColor="#E60707" />
+            <EditText
+                android:id="@+id/editTextText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:textColor="@color/text_main"
+                android:text="@string/floris_room_lights" />
+
+            <Button
+                android:id="@+id/button_on"
+                android:layout_width="370dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/text_main"
+                android:backgroundTint="@android:color/holo_green_light"
+                android:text="@string/on"
+                app:rippleColor="#4CAF50" />
+
+            <Button
+                android:id="@+id/button_off"
+                android:layout_width="370dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/text_main"
+                android:backgroundTint="@android:color/holo_red_light"
+                android:text="@string/off"
+                app:rippleColor="#9C0101" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

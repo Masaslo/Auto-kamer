@@ -2,7 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Autokamerapp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/background</item>
+        <item name="colorSecondary">@color/background_darker</item>
     </style>
 
     <style name="Theme.Autokamerapp" parent="Base.Theme.Autokamerapp" />
