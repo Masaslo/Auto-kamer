@@ -10,5 +10,14 @@
         android:id="@+id/FirstFragment"
         android:name="com.example.auto_kamer_app.FirstFragment"
         android:label="Room Controls"
-        tools:layout="@layout/fragment_first"/>
+        tools:layout="@layout/fragment_first">
+        <action
+            android:id="@+id/action_FirstFragment_to_mqtt2"
+            app:destination="@id/mqtt2" />
+    </fragment>
+    <fragment
+        android:id="@+id/mqtt2"
+        android:name="com.example.auto_kamer_app.mqtt"
+        android:label="fragment_mqtt2"
+        tools:layout="@layout/fragment_mqtt2" />
 </navigation>

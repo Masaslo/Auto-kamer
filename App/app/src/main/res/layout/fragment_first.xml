@@ -19,23 +19,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/editTextText"
+
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
+                android:layout_height="34dp"
+                android:text="@string/floris_room_lights"
+                android:textAlignment="center"
                 android:textColor="@color/text_main"
-                android:text="@string/floris_room_lights" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/button_on"
                 android:layout_width="370dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
-                android:textColor="@color/text_main"
                 android:backgroundTint="@android:color/holo_green_light"
                 android:text="@string/on"
+                android:textColor="@color/text_main"
+                app:cornerRadius="@dimen/fab_margin"
                 app:rippleColor="#4CAF50" />
 
             <Button
@@ -43,9 +45,10 @@
                 android:layout_width="370dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
-                android:textColor="@color/text_main"
                 android:backgroundTint="@android:color/holo_red_light"
                 android:text="@string/off"
+                android:textColor="@color/text_main"
+                app:cornerRadius="@dimen/fab_margin"
                 app:rippleColor="#9C0101" />
 
         </LinearLayout>
